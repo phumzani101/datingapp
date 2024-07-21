@@ -26,8 +26,8 @@ export interface UserDocument extends Document {
     linkedin?: string;
   };
   street: string;
-  province: mongoose.Schema.Types.ObjectId | string;
-  city: mongoose.Schema.Types.ObjectId | string;
+  province: string;
+  city: string;
   postalcode: string;
   usertype: string;
   reputation?: number;
@@ -107,12 +107,12 @@ const UserSchema = new Schema<UserDocument, {}, Method>(
       trim: true,
     },
     province: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Province",
+      type: String,
+      trim: true,
     },
     city: {
-      type: mongoose.Schema.ObjectId,
-      ref: "City",
+      type: String,
+      trim: true,
     },
     postalcode: {
       type: String,

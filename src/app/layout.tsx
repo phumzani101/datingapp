@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import PageNavbar from "@/components/shared/nav/PageNavbar";
 import AppProviders from "@/components/shared/providers/AppProviders";
+import PageFooter from "@/components/shared/nav/PageFooter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <AppProviders>
           <PageNavbar />
           <div className="container mx-auto">{children}</div>
+          <PageFooter />
         </AppProviders>
       </body>
     </html>
