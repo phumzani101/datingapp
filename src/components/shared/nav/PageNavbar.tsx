@@ -1,14 +1,12 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/M9h82ZZbeTX
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { GiMatchTip } from "react-icons/gi";
+import { auth } from "@/auth";
+import UserMenu from "./UserMenu";
 
-export default function PageNavbar() {
+export default async function PageNavbar() {
+  const session = await auth();
   return (
     <header className="flex h-16 w-full items-center justify-between px-4 md:px-6 bg-gradient-to-r from-purple-400 to-purple-700">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -39,10 +37,28 @@ export default function PageNavbar() {
             Messages
           </Link>
         </nav>
-        <div className="flex justify-end">
-          <Link href="/auth/signin">
-            <Button variant="outline">Login</Button>
-          </Link>
+
+        <div className="flex items-center gap-4 justify-end">
+          {session?.user ? (
+            <UserMenu user={session?.user} />
+          ) : (
+            <div className="hidden gap-4 md:flex">
+              <Link
+                href="/auth/signin"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                prefetch={false}
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/auth/signup"
+                className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                prefetch={false}
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <Sheet>

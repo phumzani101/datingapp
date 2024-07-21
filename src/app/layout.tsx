@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import PageNavbar from "@/components/shared/nav/PageNavbar";
+import AppProviders from "@/components/shared/providers/AppProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <PageNavbar />
-        <div className="container mx-auto p-10">{children}</div>
+        <AppProviders>
+          <PageNavbar />
+          <div className="container mx-auto">{children}</div>
+        </AppProviders>
       </body>
     </html>
   );
