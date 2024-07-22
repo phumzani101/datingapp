@@ -11,7 +11,8 @@ export interface UserDocument extends Document {
   firstname?: string;
   lastname?: string;
   email: string;
-  gender: string;
+  gender?: string;
+  description?: string;
   phone?: string;
   password?: string;
   bio?: string;
@@ -69,6 +70,10 @@ const UserSchema = new Schema<UserDocument, {}, Method>(
       lowercase: true,
     },
     gender: {
+      type: String,
+      trim: true,
+    },
+    description: {
       type: String,
       trim: true,
     },
