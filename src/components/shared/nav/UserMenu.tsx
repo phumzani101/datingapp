@@ -13,12 +13,13 @@ import Link from "next/link";
 import { signOutUserAction } from "@/server/actions/authActions";
 
 const UserMenu = ({ user }: { user: any }) => {
+  const userImg = user?.image || user?.avatar || "/images/user.png";
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="/images/user.png" />
+            <AvatarImage src={userImg} />
             <AvatarFallback>JP</AvatarFallback>
           </Avatar>
         </Button>

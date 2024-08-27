@@ -36,7 +36,7 @@ export interface UserDocument extends Document {
   status?: string;
   provider?: string;
   emailVerified?: Date;
-  birthdate?: Date;
+  birthOfDate?: Date;
   agreeTerms: boolean;
   saved: Schema.Types.ObjectId[] | string[];
   accounts: Schema.Types.ObjectId[] | string[];
@@ -45,6 +45,8 @@ export interface UserDocument extends Document {
   tokenExpiresAt?: Date;
   views?: number;
   slug?: string;
+  uploads: Schema.Types.ObjectId[] | string[];
+  avatar: Schema.Types.ObjectId | string;
 }
 
 interface Method {
@@ -79,10 +81,10 @@ const UserSchema = new Schema<UserDocument, {}, Method>(
     },
     password: { type: String, select: false },
     image: String,
-    // image: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Upload",
-    // },
+    avatar: {
+      type: Schema.Types.ObjectId,
+      ref: "Upload",
+    },
     bio: { type: String },
     location: { type: String },
     website: { type: String },
@@ -149,7 +151,13 @@ const UserSchema = new Schema<UserDocument, {}, Method>(
       type: String,
       default: "credentials",
     },
-    birthdate: Date,
+    birthOfDate: Date,
+    uploads: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Upload",
+      },
+    ],
     accounts: [
       {
         type: Schema.Types.ObjectId,
