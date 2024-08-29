@@ -36,7 +36,7 @@ export interface UserDocument extends Document {
   status?: string;
   provider?: string;
   emailVerified?: Date;
-  birthOfDate?: Date;
+  dateOfBirth?: Date;
   agreeTerms: boolean;
   saved: Schema.Types.ObjectId[] | string[];
   accounts: Schema.Types.ObjectId[] | string[];
@@ -151,7 +151,7 @@ const UserSchema = new Schema<UserDocument, {}, Method>(
       type: String,
       default: "credentials",
     },
-    birthOfDate: Date,
+    dateOfBirth: Date,
     uploads: [
       {
         type: Schema.Types.ObjectId,
