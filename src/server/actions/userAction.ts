@@ -120,11 +120,7 @@ export async function userByIdAction(params: any) {
   try {
     await mongodbConnect();
     const userId = params.userId;
-    const user = await UserModel.findById(userId)
-      .populate("image")
-      .populate("province")
-      .populate("city")
-      .lean();
+    const user = await UserModel.findById(userId).lean();
 
     if (!user) {
       return { error: "User not found", user: null };
@@ -158,8 +154,7 @@ export async function userReadAction(params: any) {
   try {
     await mongodbConnect();
     const userId = params.userId;
-    const user = await UserModel.findById(userId)
-    .lean();
+    const user = await UserModel.findById(userId).lean();
 
     if (!user) {
       return { error: "User not found" };
