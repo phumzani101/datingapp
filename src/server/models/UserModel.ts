@@ -47,6 +47,8 @@ export interface UserDocument extends Document {
   slug?: string;
   uploads: Schema.Types.ObjectId[] | string[];
   avatar: Schema.Types.ObjectId | string;
+  followers?: Schema.Types.ObjectId[] | string[];
+  following?: Schema.Types.ObjectId[] | string[];
 }
 
 interface Method {
@@ -162,6 +164,18 @@ const UserSchema = new Schema<UserDocument, {}, Method>(
       {
         type: Schema.Types.ObjectId,
         ref: "Account",
+      },
+    ],
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
       },
     ],
     emailVerified: { type: Date },

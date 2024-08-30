@@ -445,3 +445,38 @@ export async function userSaveListingAction(params: {
     };
   }
 }
+
+// export async function upvoteUser(params: any) {
+//   try {
+//     await mongodbConnect();
+//     const { userId, hasLiked, path } = params;
+
+//     let query = {};
+
+//     if (hasLiked) {
+//       query = { $pull: { upvotes: userId } };
+//     } else if (hasDownVoted) {
+//       query = {
+//         $pull: { following: userId },
+//         $push: { fo: userId },
+//       };
+//     } else {
+//       query = { $addToSet: { upvotes: userId } };
+//     }
+
+//     //create the user
+//     let user = await UserModel.findByIdAndUpdate(userId, query, {
+//       new: true,
+//     });
+
+//     if (!user) {
+//       throw new Error("User not found");
+//     }
+
+//     revalidatePath(path);
+//     return JSON.parse(JSON.stringify(user));
+//   } catch (error) {
+//     console.log("USER_LIKE_ERROR", error);
+//     throw error;
+//   }
+// }
